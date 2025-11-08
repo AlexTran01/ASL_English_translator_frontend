@@ -1,18 +1,25 @@
-export default function LeftComponent({ camera_state}) {
+import React from "react";
+import Webcam from "react-webcam";
 
-  return (
-    <div className="left-container">
-      <div className="camera">
-        {camera_state ? (
-          <video className="w-1/2 h-60 rounded-lg border"
-          
-          />
-        ) : (
-          <div className="w-1/2 h-60 rounded-lg border">
-            Camera is off
-          </div>
-        )}
-      </div>
-    </div>
-  )
+export default function LeftComponent({ camera_state }) {
+
+    return (
+        <div className="left-container">
+            <div className="camera">
+                {camera_state ? (
+                    <div className="h-100 rounded-lg">
+                        <Webcam audio={false}        
+                            width="100%"
+                            height="100%"
+                            className="object-cover w-full h-full" 
+                            mirrored = {true}/>
+                    </div>
+                ) : (
+                    <div>
+                        Camera is off
+                    </div>
+                )}
+            </div>
+        </div>
+    )
 }
