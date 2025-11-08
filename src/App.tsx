@@ -4,11 +4,16 @@ import viteLogo from '/vite.svg'
 import './styling/App.css'
 import LeftComponent from './components/LeftComponent.jsx';
 import RightComponent from './components/RightComponet.jsx';
+import Demo from './components/Demo.jsx'
+import Switcher4 from './components/Switcher4.jsx'
 
 
 function App() {
 
   const [camera_state, set_camera_state] = useState(false)
+  
+  const demo = false
+
 
   function toggleCamera() {
     if (camera_state)
@@ -17,6 +22,10 @@ function App() {
       set_camera_state(true)
   }
 
+
+  function showGlasses(){
+    
+  }
 
   return (
     <>
@@ -32,9 +41,9 @@ function App() {
 
       <div className="main-container">
 
-        <h1 className='text-3xl font-bold text-white-300 text-center'>Welcome to SynSight</h1>
+        <h1 className='text-3xl font-bold text-white-300 text-center mb-4'>Welcome to SynSight</h1>
 
-        <div className="flex">
+        <div className="flex gap-6">
           <div className="w-1/2 h-100 rounded-lg border border-3">
             <LeftComponent camera_state={camera_state} />
           </div>
@@ -42,10 +51,11 @@ function App() {
             <RightComponent />
           </div>
         </div>
+        
+        <Switcher4/>
 
-        <button className="show-demo-button">
-          Show Demo!
-        </button>
+        <Demo/>
+
       </div>
     </>
 
