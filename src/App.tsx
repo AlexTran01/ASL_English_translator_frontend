@@ -32,13 +32,11 @@ function App() {
 
       <div className="main-container">
 
-        <h1 className='text-3xl font-bold text-white-300 text-center'>Welcome to SynSight</h1>
-
         <div className="flex">
-          <div className="w-1/2 h-100 rounded-lg border border-3">
+          <div className="left_box w-1/2 h-100 rounded-lg border border-3">
             <LeftComponent camera_state={camera_state} />
           </div>
-          <div className="w-1/2 h-100 rounded-lg border border-3">
+          <div className="right_box w-1/2 h-100 rounded-lg border border-3">
             <RightComponent />
           </div>
         </div>
