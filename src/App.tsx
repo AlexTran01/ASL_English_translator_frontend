@@ -8,6 +8,9 @@ import Demo from './components/Demo.jsx'
 import Switcher4 from './components/Switcher4.jsx'
 import OptionDropdown from './components/OptionDropdown.jsx'
 
+// 👇 add this import for your logo
+import synsightLogo from './assets/ChatGPT Image Nov 9, 2025, 02_49_32 AM.png'
+
 type AppProps = {
   onGoHome?: () => void;
 };
@@ -49,8 +52,16 @@ function App({ onGoHome }: AppProps) {
   return (
     <>
       <div className="navbar border-b-2 w-full h-20 flex flex-row items-center justify-between px-4">
-        <div className='project-name text-5xl'>
-          SynSight
+        {/* 👇 logo + title */}
+        <div className="flex items-center gap-3">
+          <img
+            src={synsightLogo}
+            alt="SynSight logo"
+            className="h-18 w-18 object-contain"
+          />
+          <div className="project-name text-5xl">
+            SynSight
+          </div>
         </div>
 
         <div className="flex gap-3">
@@ -59,7 +70,7 @@ function App({ onGoHome }: AppProps) {
             Turn {camera_state ? "Off" : "On"} Camera
           </button>
 
-          {/* New light mode toggle button */}
+          {/* Light mode toggle button */}
           <button className='turn-on-camera-btn' onClick={handleToggleLightMode}>
             {lightMode ? "Dark Mode" : "Light Mode"}
           </button>
@@ -88,7 +99,6 @@ function App({ onGoHome }: AppProps) {
 
         {/* Floating burger with Home + demo switch inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>
-          {/* Pop-out menu: Home + Demo toggle (light mode removed) */}
           <div className="fab-menu">
             {/* Home button */}
             <button
