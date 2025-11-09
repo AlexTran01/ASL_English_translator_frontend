@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+/* === THEME VARIABLES === */
+:root {
+  /* default = dark mode */
+  --page-bg: #000000;
+  --navbar-bg: #000000;
+  --main-bg: #000000;
+  --panel-bg: #000000;
+  --text-main: #ffffff;
+}
+
+/* Light mode overrides – applied when body has .light-mode */
+body.light-mode {
+  --page-bg: #f3f4f6;   /* page background */
+  --navbar-bg: #ffffff; /* navbar background */
+  --main-bg: #ffffff;   /* main container background */
+  --panel-bg: #f9fafb;  /* left/right panels */
+  --text-main: #111827; /* main text color */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);  /* solid page background */
+  color: var(--text-main);     /* theme text color */
+}
+
+/* ensure the React root can stretch */
+#root {
+  min-height: 100vh;
+  background: transparent; /* let .main-container keep its own bg */
+}
+
 /* basic */
 .navbar {
   position: relative;
@@ -10,8 +43,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background: #252526;
-  color: white;
+  background: var(--navbar-bg);
+  color: var(--text-main);
 }
 
 .navbar::after {
@@ -73,11 +106,13 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
 .main-container {
   padding: 30px;
   max-width: 1200px;     /* adjust as you like */
   margin: 40px auto;     /* centers horizontally + adds space top/bottom */
-  background: #252526; /* optional */
+  background: var(--main-bg); /* theme background */
+  color: var(--text-main);
   border-radius: 12px;   /* optional */
 }
 
@@ -86,8 +121,8 @@
   height: 450px;
   width: calc((100% - 70px) / 2); /* equal width minus gap */
   margin-right: 70px;
-  background: #252526;
-  color: white;
+  background: var(--panel-bg);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 10px;
 }
@@ -96,8 +131,8 @@
   float: left;
   height: 450px;
   width: calc((100% - 70px) / 2);
-  background:#252526;
-  color: white;
+  background: var(--panel-bg);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 10px;
 }
@@ -105,23 +140,39 @@
 /* Clearfix for floats */
 .container::after { content: ""; display: table; clear: both; }
 
-/* Circular switch button, centered in the 70px gap */
+/* Circular switch button, same roundness/size as menu button */
+/* Circular switch button, same size as menu but smaller arrow */
 .switch-btn {
-  position: absolute ;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+
+  width: 64px;           /* same circle size as burger */
+  height: 64px;
+  border-radius: 9999px;
   border: none;
-  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
+
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
   color: white;
-  font-size: 24px;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* arrow size */
+  font-size: 28px;       /* smaller arrow */
+  font-weight: 700;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.8),
+    0 0 2px rgba(0, 0, 0, 0.4);
 }
 
 .show-demo-button {
@@ -134,73 +185,75 @@
   border: none;
   cursor: pointer;
 }
+
 /* === Burger + ON/OFF bubble === */
 
 .burger-wrapper {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 56px;
-  height: 56px;
+  width: 64px;      /* match on_off-btn size */
+  height: 64px;     /* match on_off-btn size */
   z-index: 200;
 }
 
-/* Circular burger button */
+/* Base circle (size – adjust if needed) */
 #nav-icon3 {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;          /* circle */
-  background: #111827;            /* dark background */
-  border: 2px solid #f9fafb;      /* light border */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   cursor: pointer;
-  padding: 0;
+  z-index: 200;
 }
 
-/* Hamburger lines */
+/* Bigger hamburger lines */
 #nav-icon3 span {
   position: absolute;
   left: 50%;
-  width: 24px;
-  height: 3px;
+  width: 34px;              /* wider lines */
+  height: 4px;              /* thicker lines */
   background: #f9fafb;
   border-radius: 9999px;
   transform: translateX(-50%);
   transition:
     top 0.25s ease,
     transform 0.25s ease,
+    opacity 0.25s ease,
     width 0.25s ease,
-    left 0.25s ease,
-    opacity 0.25s ease;
+    left 0.25s ease;
 }
 
-/* 4 lines stacked */
-#nav-icon3 span:nth-child(1) { top: 18px; }
-#nav-icon3 span:nth-child(2) { top: 26px; }
-#nav-icon3 span:nth-child(3) { top: 34px; }
-#nav-icon3 span:nth-child(4) { top: 42px; }
+/* 3 lines centered vertically in the 64x64 circle */
+#nav-icon3 span:nth-child(1) { top: 20px; }
+#nav-icon3 span:nth-child(2) { top: 30px; }
+#nav-icon3 span:nth-child(3) { top: 40px; }
 
-/* Turn into an "X" when open */
+/* Open state – turn into an X, hide the middle line */
 #nav-icon3.open span:nth-child(1) {
-  top: 26px;
-  width: 0%;
-  left: 50%;
-}
-
-#nav-icon3.open span:nth-child(2) {
-  top: 26px;
+  top: 30px;
   transform: translateX(-50%) rotate(45deg);
 }
 
+#nav-icon3.open span:nth-child(2) {
+  opacity: 0;
+}
+
 #nav-icon3.open span:nth-child(3) {
-  top: 26px;
+  top: 30px;
   transform: translateX(-50%) rotate(-45deg);
 }
 
-#nav-icon3.open span:nth-child(4) {
-  top: 26px;
-  width: 0%;
-  left: 50%;
-}
 
 /* Container that holds the ON/OFF button */
 .onoff-container {
@@ -224,14 +277,228 @@
 
 /* Style the ON/OFF button as its own circle */
 .onoff-container .on_off-btn {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 9999px;
   border: none;
-  background: #10b981;           /* green-ish; tweak as you like */
+  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+}
+
+/* === Floating burger wrapper in bottom-right === */
+.fab-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  z-index: 200;
+}
+
+/* Burger button as a circle that fills the wrapper */
+#nav-icon3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+/* Bigger 3-line hamburger */
+#nav-icon3 span {
+  position: absolute;
+  left: 50%;
+  width: 34px;
+  height: 4px;
+  background: #f9fafb;
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  transition:
+    top 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    width 0.25s ease,
+    left 0.25s ease;
+}
+
+/* 3 lines vertically centered in the 64x64 circle */
+#nav-icon3 span:nth-child(1) { top: 20px; }
+#nav-icon3 span:nth-child(2) { top: 30px; }
+#nav-icon3 span:nth-child(3) { top: 40px; }
+
+/* Turn burger into an X when open (middle line hidden) */
+#nav-icon3.open span:nth-child(1) {
+  top: 30px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+#nav-icon3.open span:nth-child(2) {
+  opacity: 0;
+}
+
+#nav-icon3.open span:nth-child(3) {
+  top: 30px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Pop-out menu that lives ABOVE the burger */
+.fab-menu {
+  position: absolute;
+  bottom: calc(100% + 12px);   /* above the burger circle */
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);  /* center horizontally, slightly down */
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* When burger is open, show the menu */
+.fab-wrapper.open .fab-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);    /* slide up into place */
+}
+
+
+/* Shared style for the little round buttons (Home + ON/OFF) */
+.fab-btn {
+  width: 64px;    /* match burger size */
+  height: 64px;   /* match burger size */
+  border-radius: 9999px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+
+/* Home bubble: dark-blue gradient with house icon */
+.fab-btn.home-btn {
+  background: linear-gradient(
+    to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  color: #f9fafb;
+  font-size: 26px;
+}
+
+/* ON/OFF bubble: reuse your purple gradient and center the switch */
+.fab-menu .on_off-btn {
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 64px;    /* match burger size */
+  height: 64px;   /* match burger size */
+  padding: 0;
+}
+
+/* === Fixed overlay position for RightComponent on Demo === */
+
+/* Make sure the demo container is a positioning context */
+.demo-container {
+  position: relative; /* Tailwind 'relative' already adds this, but safe here */
+}
+
+/* This controls WHERE the overlay sits on the image and how big the area is */
+.demo-overlay {
+  position: absolute;
+
+  /* POSITION — tweak these to move it: */
+  top: 70%;    /* 0% = very top of image, 100% = bottom */
+  left: 75%;   /* 0% = far left, 100% = far right */
+  transform: translate(-50%, -50%); /* keep it centered at (top,left) */
+
+  /* SIZE of the overlay area on the image: */
+  width: 20%;          /* width relative to the image */
+  height: 25%;         /* height relative to the image */
+  max-width: 420px;    /* cap size on big screens */
+  max-height: 260px;   /* optional: cap height so it doesn’t get too tall */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none; /* remove this if you want it clickable */
+}
+
+.demo-overlay-box {
+  width: 100%;
+  height: 100%;              
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+
+  background-image: linear-gradient(
+    135deg,
+    rgba(248, 183, 217, 0.25) 0%,
+    rgba(252, 223, 240, 0.18) 25%,
+    rgba(213, 241, 255, 0.15) 55%,
+    rgba(113, 203, 233, 0.18) 100%
+  );
+  background-color: transparent;
+  background-blend-mode: normal;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+
+  font-size: 0.85rem;
+  color: #ffffff;
+
+  box-sizing: border-box;
+
+  /* scrolling inside the rounded border */
+  overflow-y: auto;    /* vertical scroll when needed */
+  overflow-x: hidden;  /* no sideways scroll */
+}
+
+.demo-overlay-box .output-box {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: #ffffff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
