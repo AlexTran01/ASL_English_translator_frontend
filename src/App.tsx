@@ -28,12 +28,6 @@ function App() {
     setNavOpen(prev => !prev)
   }
 
-  // function toggleCamera() {
-  //   if (camera_state)
-  //     set_camera_state(false)
-  //   else
-  //     set_camera_state(true)
-  // }
 
   function handleToggleDemo() {
     setShowDemo(prev => !prev)  // toggle Demo component
@@ -57,7 +51,7 @@ function App() {
 
         <div className="flex">
           <div className="left_box w-1/2 h-100 rounded-lg border border-3">
-            <LeftComponent camera_state={camera_state} />
+            <LeftComponent camera_state={camera_state} selected={selected} />
           </div>
           <button className="switch-btn" aria-label="Switch view">
             ⇄
