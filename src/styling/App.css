@@ -140,67 +140,68 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 56px;
-  height: 56px;
+  width: 64px;      /* match on_off-btn size */
+  height: 64px;     /* match on_off-btn size */
   z-index: 200;
 }
 
-/* Circular burger button */
+/* Base circle (size – adjust if needed) */
 #nav-icon3 {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;          /* circle */
-  background: #111827;            /* dark background */
-  border: 2px solid #f9fafb;      /* light border */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   cursor: pointer;
-  padding: 0;
+  z-index: 200;
 }
 
-/* Hamburger lines */
+/* Bigger hamburger lines */
 #nav-icon3 span {
   position: absolute;
   left: 50%;
-  width: 24px;
-  height: 3px;
+  width: 34px;              /* wider lines */
+  height: 4px;              /* thicker lines */
   background: #f9fafb;
   border-radius: 9999px;
   transform: translateX(-50%);
   transition:
     top 0.25s ease,
     transform 0.25s ease,
+    opacity 0.25s ease,
     width 0.25s ease,
-    left 0.25s ease,
-    opacity 0.25s ease;
+    left 0.25s ease;
 }
 
-/* 4 lines stacked */
-#nav-icon3 span:nth-child(1) { top: 18px; }
-#nav-icon3 span:nth-child(2) { top: 26px; }
-#nav-icon3 span:nth-child(3) { top: 34px; }
-#nav-icon3 span:nth-child(4) { top: 42px; }
+/* 3 lines centered vertically in the 64x64 circle */
+#nav-icon3 span:nth-child(1) { top: 20px; }
+#nav-icon3 span:nth-child(2) { top: 30px; }
+#nav-icon3 span:nth-child(3) { top: 40px; }
 
-/* Turn into an "X" when open */
+/* Open state – turn into an X, hide the middle line */
 #nav-icon3.open span:nth-child(1) {
-  top: 26px;
-  width: 0%;
-  left: 50%;
-}
-
-#nav-icon3.open span:nth-child(2) {
-  top: 26px;
+  top: 30px;
   transform: translateX(-50%) rotate(45deg);
 }
 
+#nav-icon3.open span:nth-child(2) {
+  opacity: 0;
+}
+
 #nav-icon3.open span:nth-child(3) {
-  top: 26px;
+  top: 30px;
   transform: translateX(-50%) rotate(-45deg);
 }
 
-#nav-icon3.open span:nth-child(4) {
-  top: 26px;
-  width: 0%;
-  left: 50%;
-}
 
 /* Container that holds the ON/OFF button */
 .onoff-container {
@@ -224,14 +225,153 @@
 
 /* Style the ON/OFF button as its own circle */
 .onoff-container .on_off-btn {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 9999px;
   border: none;
-  background: #10b981;           /* green-ish; tweak as you like */
+  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);           /* green-ish; tweak as you like */
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
+
+/* === Floating burger wrapper in bottom-right === */
+.fab-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  z-index: 200;
+}
+
+/* Burger button as a circle that fills the wrapper */
+#nav-icon3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+/* Bigger 3-line hamburger */
+#nav-icon3 span {
+  position: absolute;
+  left: 50%;
+  width: 34px;
+  height: 4px;
+  background: #f9fafb;
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  transition:
+    top 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    width 0.25s ease,
+    left 0.25s ease;
+}
+
+/* 3 lines vertically centered in the 64x64 circle */
+#nav-icon3 span:nth-child(1) { top: 20px; }
+#nav-icon3 span:nth-child(2) { top: 30px; }
+#nav-icon3 span:nth-child(3) { top: 40px; }
+
+/* Turn burger into an X when open (middle line hidden) */
+#nav-icon3.open span:nth-child(1) {
+  top: 30px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+#nav-icon3.open span:nth-child(2) {
+  opacity: 0;
+}
+
+#nav-icon3.open span:nth-child(3) {
+  top: 30px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Pop-out menu that lives ABOVE the burger */
+.fab-menu {
+  position: absolute;
+  bottom: calc(100% + 12px);   /* above the burger circle */
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);  /* center horizontally, slightly down */
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* When burger is open, show the menu */
+.fab-wrapper.open .fab-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);    /* slide up into place */
+}
+
+
+/* Shared style for the little round buttons (Home + ON/OFF) */
+.fab-btn {
+  width: 64px;    /* match burger size */
+  height: 64px;   /* match burger size */
+  border-radius: 9999px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+
+/* Home bubble: dark-blue gradient with house icon */
+.fab-btn.home-btn {
+  background: linear-gradient(
+    to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  color: #f9fafb;
+  font-size: 26px;
+}
+
+/* ON/OFF bubble: reuse your purple gradient and center the switch */
+.fab-menu .on_off-btn {
+  background: linear-gradient(to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 64px;    /* match burger size */
+  height: 64px;   /* match burger size */
+  padding: 0;
+}
+
