@@ -6,7 +6,14 @@ type WelcomePageProps = {
 
 const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-purple-900 text-slate-50 flex items-center justify-center px-6">
+    <div
+      className="min-h-screen text-slate-50 flex items-center justify-center px-6"
+      style={{
+        // dark black → lighter black vertical gradient
+        background:
+          "linear-gradient(to bottom, #000000 0%, #050505 40%, #111111 100%)",
+      }}
+    >
       <div className="max-w-4xl w-full space-y-10">
         {/* Logo + title */}
         <div className="text-center space-y-4">
@@ -68,20 +75,27 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
           </div>
         </div>
 
-        {/* Call to action with "Home" button */}
+        {/* Call to action with "Enter SynSight" button */}
         <div className="flex flex-col items-center gap-4">
           <button
             type="button"
             onClick={onEnterApp}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-sky-400 text-slate-50 font-semibold text-sm md:text-base shadow-lg shadow-purple-900/60 hover:shadow-xl hover:scale-[1.02] active:scale-100 transition-all"
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-slate-50 font-semibold text-sm md:text-base shadow-lg shadow-purple-900/60 hover:shadow-xl hover:scale-[1.02] active:scale-100 transition-all"
+            style={{
+              background:
+                "linear-gradient(to right, #471396 0%, #621DB0 25%, #7C27CA 50%, #9631E5 75%, #B13BFF 100%)",
+            }}
           >
             <span className="text-lg">🏠</span>
             <span>Enter SynSight</span>
           </button>
 
           <p className="text-[11px] md:text-xs text-slate-400 text-center max-w-md">
-            Click <span className="font-semibold text-slate-200">Enter SynSight</span> to go to the main app
-            (<code>App.tsx</code> translator interface).
+            Click{" "}
+            <span className="font-semibold text-slate-200">
+              Enter SynSight
+            </span>{" "}
+            to go to the main app (<code>App.tsx</code> translator interface).
           </p>
         </div>
       </div>

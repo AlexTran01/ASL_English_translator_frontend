@@ -11,27 +11,22 @@ export default function Demo(props) {
     if (!box) return;
 
     const hasOverflow = box.scrollHeight > box.clientHeight;
-    if (!hasOverflow) return; // nothing to scroll → do nothing
+    if (!hasOverflow) return; // nothing to scroll → don't animate
 
     let frameId;
-    let direction = 1;        // 1 = down, -1 = up
-    const speed = 0.8;        // 🔥 increase this if it still feels slow
+    const speed = 0.5; // pixels per frame-ish, tweak this if too fast/slow
 
     const step = () => {
       const maxScroll = box.scrollHeight - box.clientHeight;
 
-      // if it stopped overflowing for some reason, bail out
       if (maxScroll <= 0) return;
 
-      box.scrollTop += direction * speed;
+      // scroll down
+      box.scrollTop += speed;
 
-      // bounce at top/bottom
-      if (box.scrollTop <= 0) {
+      // if we reach or pass the bottom, jump back to top
+      if (box.scrollTop >= maxScroll) {
         box.scrollTop = 0;
-        direction = 1;
-      } else if (box.scrollTop >= maxScroll) {
-        box.scrollTop = maxScroll;
-        direction = -1;
       }
 
       frameId = requestAnimationFrame(step);
@@ -57,7 +52,7 @@ export default function Demo(props) {
         style={{ transform: "scale(1.45)" }}
       />
 
-      {/* Overlay with auto-scrolling RightComponent */}
+      {/* Overlay with auto-scrolling text */}
       <div className="demo-overlay">
         <div className="demo-overlay-box" ref={overlayRef}>
           <RightComponent />
