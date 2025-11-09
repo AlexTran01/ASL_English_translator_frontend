@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './styling/App.css'
@@ -18,6 +18,17 @@ function App({ onGoHome }: AppProps) {
   const [navOpen, setNavOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
   const [selected, setSelected] = useState("Translation Option")
+  const [lightMode, setLightMode] = useState(false)
+
+  // apply/remove light-mode class on <body>
+  useEffect(() => {
+    const body = document.body
+    if (lightMode) {
+      body.classList.add('light-mode')
+    } else {
+      body.classList.remove('light-mode')
+    }
+  }, [lightMode])
 
   const toggleNav = () => {
     setNavOpen(prev => !prev);
@@ -31,6 +42,10 @@ function App({ onGoHome }: AppProps) {
     setShowDemo(prev => !prev)
   }
 
+  function handleToggleLightMode() {
+    setLightMode(prev => !prev)
+  }
+
   return (
     <>
       <div className="navbar border-b-2 w-full h-20 flex flex-row items-center justify-between px-4">
@@ -38,9 +53,20 @@ function App({ onGoHome }: AppProps) {
           SynSight
         </div>
 
-        <button className='turn-on-camera-btn' onClick={toggleCamera}>
-          turn {camera_state ? "off" : "on"} camera
-        </button>
+        <div className="flex gap-3">
+          <button className='turn-on-camera-btn' onClick={toggleCamera}>
+            turn {camera_state ? "off" : "on"} camera
+          </button>
+
+          {/* top-right light mode button */}
+          <button
+            className="turn-on-camera-btn"
+            type="button"
+            onClick={handleToggleLightMode}
+          >
+            {lightMode ? "Dark mode" : "Light mode"}
+          </button>
+        </div>
       </div>
 
       <div className="main-container">
@@ -63,10 +89,11 @@ function App({ onGoHome }: AppProps) {
 
         {showDemo && <Demo />}
 
-        {/* Floating burger with Home + ON/OFF inside */}
+        {/* Floating burger with Home + switches inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>
-          {/* Pop-out menu: Home on top, ON/OFF below */}
+          {/* Pop-out menu: Home, Demo toggle, Light mode toggle */}
           <div className="fab-menu">
+            {/* Home button */}
             <button
               className="fab-btn home-btn"
               type="button"
@@ -79,9 +106,14 @@ function App({ onGoHome }: AppProps) {
               🏠
             </button>
 
+            {/* Demo ON/OFF */}
             <button className="fab-btn on_off-btn" type="button">
               <Switcher4 isChecked={showDemo} onChange={handleToggleDemo} />
-              
+            </button>
+
+            {/* Light mode ON/OFF */}
+            <button className="fab-btn on_off-btn" type="button" aria-label="Toggle light mode">
+              <Switcher4 isChecked={lightMode} onChange={handleToggleLightMode} />
             </button>
           </div>
 

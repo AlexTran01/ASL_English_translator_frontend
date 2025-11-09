@@ -1,11 +1,30 @@
 @import "tailwindcss";
 
+/* === THEME VARIABLES === */
+:root {
+  /* default = dark mode */
+  --page-bg: #000000;
+  --navbar-bg: #000000;
+  --main-bg: #000000;
+  --panel-bg: #000000;
+  --text-main: #ffffff;
+}
+
+/* Light mode overrides – applied when body has .light-mode */
+body.light-mode {
+  --page-bg: #f3f4f6;   /* page background */
+  --navbar-bg: #ffffff; /* navbar background */
+  --main-bg: #ffffff;   /* main container background */
+  --panel-bg: #f9fafb;  /* left/right panels */
+  --text-main: #111827; /* main text color */
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #000000;  /* solid black */
-  color: #ffffff;       /* optional default text color */
+  background: var(--page-bg);  /* solid page background */
+  color: var(--text-main);     /* theme text color */
 }
 
 /* ensure the React root can stretch */
@@ -24,8 +43,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background: #000000;
-  color: white;
+  background: var(--navbar-bg);
+  color: var(--text-main);
 }
 
 .navbar::after {
@@ -87,11 +106,13 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .main-container {
   padding: 30px;
   max-width: 1200px;     /* adjust as you like */
   margin: 40px auto;     /* centers horizontally + adds space top/bottom */
-  background: #000000; /* optional */
+  background: var(--main-bg); /* theme background */
+  color: var(--text-main);
   border-radius: 12px;   /* optional */
 }
 
@@ -100,8 +121,8 @@ body {
   height: 450px;
   width: calc((100% - 70px) / 2); /* equal width minus gap */
   margin-right: 70px;
-  background: #000000;
-  color: white;
+  background: var(--panel-bg);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 10px;
 }
@@ -110,8 +131,8 @@ body {
   float: left;
   height: 450px;
   width: calc((100% - 70px) / 2);
-  background:#000000;
-  color: white;
+  background: var(--panel-bg);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 10px;
 }
@@ -119,24 +140,19 @@ body {
 /* Clearfix for floats */
 .container::after { content: ""; display: table; clear: both; }
 
-/* Circular switch button, centered in the 70px gap */
 /* Circular switch button, same roundness/size as menu button */
+/* Circular switch button, same size as menu but smaller arrow */
 .switch-btn {
-  font-size: 50px; /* was 24px – bigger arrow */
-  font-weight: 1000; /* make the glyph as bold as the font allows */
-
-  text-shadow:
-    0 0 1px rgba(255, 255, 255, 0.8),
-    0 0 2px rgba(255, 255, 255, 0.6);
-
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 64px;            /* match menu button width */
-  height: 64px;           /* match menu button height */
-  border-radius: 9999px;  /* same “pill” circle style */
+
+  width: 64px;           /* same circle size as burger */
+  height: 64px;
+  border-radius: 9999px;
   border: none;
+
   background: linear-gradient(to right,
     #471396 0%,
     #621DB0 25%,
@@ -145,13 +161,19 @@ body {
     #B13BFF 100%
   );
   color: white;
-  font-size: 24px;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
+  /* arrow size */
+  font-size: 28px;       /* smaller arrow */
+  font-weight: 700;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.8),
+    0 0 2px rgba(0, 0, 0, 0.4);
+}
 
 .show-demo-button {
   display: block;
@@ -163,6 +185,7 @@ body {
   border: none;
   cursor: pointer;
 }
+
 /* === Burger + ON/OFF bubble === */
 
 .burger-wrapper {
@@ -258,7 +281,7 @@ body {
   height: 64px;
   border-radius: 9999px;
   border: none;
-  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);           /* green-ish; tweak as you like */
+  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -461,7 +484,7 @@ body {
 
   box-sizing: border-box;
 
-  /* 👇 scrolling inside the rounded border */
+  /* scrolling inside the rounded border */
   overflow-y: auto;    /* vertical scroll when needed */
   overflow-x: hidden;  /* no sideways scroll */
 }
