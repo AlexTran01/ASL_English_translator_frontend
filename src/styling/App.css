@@ -16,11 +16,12 @@ body.light-mode .project-name {
 /* === THEME VARIABLES === */
 :root {
   /* default = dark mode */
-  --page-bg: #222222;
-  --navbar-bg: #222222;
-  --main-bg: #222222;
-  --panel-bg: #222222;
-  --text-main: #ffffff;
+  /* default = DARK MODE */
+  --page-bg: #050510;                 /* almost black */
+  --navbar-bg: rgba(5, 5, 15, 0.95);  /* dark bar */
+  --main-bg: transparent;             /* let the gradient show through */
+  --panel-bg: rgba(15, 23, 42, 0.9);  /* dark card panels */
+  --text-main: #f9fafb;
 
   /* Default accent gradient (purple) */
   --accent-gradient: linear-gradient(
@@ -48,8 +49,6 @@ body.light-mode {
     #3F5EFB 100%
   );
 }
-
-
 
 html,
 body {
@@ -161,7 +160,7 @@ body {
 /* Circular switch button, same size as menu but smaller arrow */
 .switch-btn {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -184,6 +183,40 @@ body {
   text-shadow:
     0 0 1px rgba(255, 255, 255, 0.8),
     0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Default (dark) style for Translation Option — same size as camera buttons */
+/* Translation Option button – bigger pill */
+.translation-option-btn {
+  background: var(--accent-gradient);  /* same gradient as other buttons */
+  color: #ffffff;
+  border: none;
+
+  /* 🔹 size – make it clearly bigger */
+  padding: 12px 28px;
+  border-radius: 9999px;   /* full pill */
+  min-width: 260px;        /* how wide it looks */
+  height: 48px;            /* taller button */
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+/* Light mode: make it beige (if you still want that behavior) */
+body.light-mode .translation-option-btn {
+  background: linear-gradient(
+    90deg,
+    #FC466B 0%,
+    #3F5EFB 100%
+  );
+  color: #ffffff;
 }
 
 .show-demo-button {
@@ -503,4 +536,31 @@ body {
   gap: 6px;
 }
 
+/* Dark/Light mode widget – same linear gradient as Translation Option */
+.theme-toggle-btn {
+  padding: 0.75rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--accent-gradient); /* same gradient as translation-option-btn */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* Camera ON background – same as dark/light widget */
+.camera-on-gradient {
+  background: var(--accent-gradient);
+}

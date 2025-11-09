@@ -7,6 +7,8 @@ import RightComponent from './components/RightComponet.jsx';
 import Demo from './components/Demo.jsx'
 import Switcher4 from './components/Switcher4.jsx'
 import OptionDropdown from './components/OptionDropdown.jsx'
+import { Camera, CameraOff, Sun, Moon, MegaphoneOff, Megaphone } from "lucide-react";
+
 
 // 👇 add this import for your logo
 import synsightLogo from './assets/ChatGPT Image Nov 9, 2025, 02_49_32 AM.png'
@@ -41,7 +43,7 @@ function App({ onGoHome }: AppProps) {
 
   function toggleCamera() {
     set_camera_state(prev => !prev)
-    
+
   }
 
   function toggleTranslate() {
@@ -71,24 +73,67 @@ function App({ onGoHome }: AppProps) {
           </div>
         </div>
 
-       
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
+          {camera_state && (
+            <button
+              onClick={toggleTranslate}
+              className={`p-3 rounded-full transition-all ${translate
+                ? 'camera-on-gradient text-white'
+                : !lightMode
+                  ? 'bg-gray-700 text-gray-400'
+                  : 'bg-gray-300 text-gray-600'
+                }`}
+              aria-label={translate ? "Stop translating" : "Start translating"}
+            >
+              {translate ? (
+                <Megaphone className="w-5 h-5" />
+              ) : (
+                <MegaphoneOff className="w-5 h-5" />
+              )}
+            </button>
+          )}
 
-           {camera_state && (<button className='start-translate-btn' onClick={toggleTranslate}>
-          {translate ? "stop translating" : "start translating"}
-        </button>
-        )}
-
-          <button className='turn-on-camera-btn' onClick={toggleCamera}>
-            Turn {camera_state ? "Off" : "On"} Camera
+          {/* Camera widget */}
+          <button
+            onClick={toggleCamera}
+            className={`p-3 rounded-full transition-all ${camera_state
+              ? 'camera-on-gradient text-white'
+              : !lightMode
+                ? 'bg-gray-700 text-gray-400'
+                : 'bg-gray-300 text-gray-600'
+              }`}
+          >
+            {camera_state ? (
+              <Camera className="w-5 h-5" />
+            ) : (
+              <CameraOff className="w-5 h-5" />
+            )}
           </button>
 
-          {/* Light mode toggle button */}
-          <button className='turn-on-camera-btn' onClick={handleToggleLightMode}>
-            {lightMode ? "Dark Mode" : "Light Mode"}
+
+          {/* Dark/light mode widget */}
+          <button
+            onClick={handleToggleLightMode}
+            className="theme-toggle-btn"
+            aria-label={lightMode ? "Switch to dark mode" : "Switch to light mode"}
+          >
+            {lightMode ? (
+              <Moon className="w-5 h-5 text-white" />
+            ) : (
+              <Sun className="w-5 h-5 text-white" />
+            )}
           </button>
+
+        </div>
+
+      </div>
+
+      <div className="mt-4 flex justify-center relative h-16">
+        <div className="absolute top-6">
+          <OptionDropdown selected={selected} setSelected={setSelected} />
         </div>
       </div>
+
 
       <div className="main-container">
 
@@ -106,9 +151,7 @@ function App({ onGoHome }: AppProps) {
           </div>
         </div>
 
-        <OptionDropdown selected={selected} setSelected={setSelected} />
-
-        {showDemo && <Demo output={output}/>}
+        {showDemo && <Demo output={output} />}
 
         {/* Floating burger with Home + demo switch inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>
