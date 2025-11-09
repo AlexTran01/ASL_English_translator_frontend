@@ -10,23 +10,22 @@ export default function Demo(props) {
     const box = overlayRef.current;
     if (!box) return;
 
-    const hasOverflow = box.scrollHeight > box.clientHeight;
-    if (!hasOverflow) return; // nothing to scroll → don't animate
-
     let frameId;
-    const speed = 0.5; // pixels per frame-ish, tweak this if too fast/slow
+    const speed = 0.5; // pixels per frame-ish
 
     const step = () => {
       const maxScroll = box.scrollHeight - box.clientHeight;
 
-      if (maxScroll <= 0) return;
-
-      // scroll down
-      box.scrollTop += speed;
-
-      // if we reach or pass the bottom, jump back to top
-      if (box.scrollTop >= maxScroll) {
+      if (maxScroll <= 0) {
+        // no overflow yet → stay at top but keep checking as new words come in
         box.scrollTop = 0;
+      } else {
+        box.scrollTop += speed;
+
+        // loop back to top when we hit the bottom
+        if (box.scrollTop >= maxScroll) {
+          box.scrollTop = 0;
+        }
       }
 
       frameId = requestAnimationFrame(step);
@@ -38,6 +37,7 @@ export default function Demo(props) {
       if (frameId) cancelAnimationFrame(frameId);
     };
   }, []);
+
 
   return (
     <div

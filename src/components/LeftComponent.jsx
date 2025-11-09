@@ -1,14 +1,16 @@
 import React from "react";
 import { useRef, useEffect } from "react";
 import Webcam from "react-webcam";
+import { VideoOff } from "lucide-react";
 
-export default function LeftComponent({ camera_state, selected, translate, setTranslate, setOutput}) {
+
+export default function LeftComponent({ camera_state, selected, translate, setTranslate, setOutput }) {
 
     const webcamRef = useRef(null);
-    const stopRef = useRef(false); 
+    const stopRef = useRef(false);
 
     useEffect(() => {
-        stopRef.current = !translate || !camera_state; 
+        stopRef.current = !translate || !camera_state;
     }, [translate, camera_state]);
 
     function Record3sThenSend(path) {
@@ -66,7 +68,7 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
         mediaRecorder.start();
 
         setTimeout(() => {
-           if (!stopRef.current) mediaRecorder.stop();
+            if (!stopRef.current) mediaRecorder.stop();
         }, 3000);
     }
 
@@ -90,23 +92,25 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
                 setTranslate(false)
                 return;
         }
-    }, [translate] );
+    }, [translate]);
 
     return (
-        <div className="left-container">
-            <div className="camera">
+        <div className="left-container w-full h-full">
+            <div className="camera w-full h-full">
                 {camera_state ? (
-                    <div className="h-100 rounded-lg">
-                        <Webcam audio={false}
-                            ref={webcamRef} 
+                    <div className="w-full h-full rounded-3xl overflow-hidden">
+                        <Webcam
+                            audio={false}
+                            ref={webcamRef}
                             width="100%"
                             height="100%"
-                            className="object-cover w-full h-full"
-                            mirrored={true} />
+                            className="w-full h-full object-cover"
+                            mirrored={true}
+                        />
                     </div>
                 ) : (
-                    <div>
-                        Camera is off
+                    <div className="w-full h-full flex items-center justify-center text-white-000">
+                        <VideoOff className="w-20 h-20" />
                     </div>
                 )}
             </div>
