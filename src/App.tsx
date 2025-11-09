@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './styling/App.css'
@@ -21,6 +21,8 @@ function App({ onGoHome }: AppProps) {
   const [navOpen, setNavOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
   const [selected, setSelected] = useState("Translation Option")
+  const [translate, setTranslate] = useState(false)
+  const [output, setOutput] = useState("")
   const [lightMode, setLightMode] = useState(false)
 
   // apply/remove light-mode class on <body>
@@ -39,6 +41,11 @@ function App({ onGoHome }: AppProps) {
 
   function toggleCamera() {
     set_camera_state(prev => !prev)
+    
+  }
+
+  function toggleTranslate() {
+    setTranslate(prev => !prev)
   }
 
   function handleToggleDemo() {
@@ -64,8 +71,14 @@ function App({ onGoHome }: AppProps) {
           </div>
         </div>
 
+       
         <div className="flex gap-3">
-          {/* Camera toggle */}
+
+           {camera_state && (<button className='start-translate-btn' onClick={toggleTranslate}>
+          {translate ? "stop translating" : "start translating"}
+        </button>
+        )}
+
           <button className='turn-on-camera-btn' onClick={toggleCamera}>
             Turn {camera_state ? "Off" : "On"} Camera
           </button>
@@ -81,7 +94,7 @@ function App({ onGoHome }: AppProps) {
 
         <div className="flex">
           <div className="left_box w-1/2 h-100 rounded-lg border border-3">
-            <LeftComponent camera_state={camera_state} />
+            <LeftComponent camera_state={camera_state} selected={selected} translate={translate} setTranslate={setTranslate} setOutput={setOutput} />
           </div>
 
           <button className="switch-btn" aria-label="Switch view">
@@ -89,13 +102,13 @@ function App({ onGoHome }: AppProps) {
           </button>
 
           <div className="right_box w-1/2 h-100 rounded-lg border border-3">
-            <RightComponent />
+            <RightComponent output={output} />
           </div>
         </div>
 
         <OptionDropdown selected={selected} setSelected={setSelected} />
 
-        {showDemo && <Demo />}
+        {showDemo && <Demo output={output}/>}
 
         {/* Floating burger with Home + demo switch inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>
@@ -131,6 +144,12 @@ function App({ onGoHome }: AppProps) {
             <span></span>
             <span></span>
           </button>
+
+          <div className="onoff-container">
+            <button className="on_off-btn" type="button">
+              <Switcher4 isChecked={showDemo} onChange={handleToggleDemo} />
+            </button>
+          </div>
         </div>
 
       </div>

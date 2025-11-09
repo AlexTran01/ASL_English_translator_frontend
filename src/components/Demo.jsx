@@ -55,7 +55,7 @@ export default function Demo(props) {
       {/* Overlay with auto-scrolling text */}
       <div className="demo-overlay">
         <div className="demo-overlay-box" ref={overlayRef}>
-          <RightComponent />
+          <RightComponent output={props.output} />
         </div>
       </div>
     </div>

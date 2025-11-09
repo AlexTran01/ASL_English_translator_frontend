@@ -21,9 +21,9 @@ export default function Example({ selected, setSelected }) {
           <MenuItem>
             <div
               className="cursor-pointer block px-4 py-2 text-sm text-gray-300 data-focus:bg-white/5 data-focus:text-white data-focus:outline-hidden"
-              onClick={() => setSelected("Letter Level-Trained AI model")}
+              onClick={()=> setSelected("Letter Level")}
             >
-              Letter Level-Trained AI model
+              Letter Level
             </div>
           </MenuItem>
           <MenuItem>

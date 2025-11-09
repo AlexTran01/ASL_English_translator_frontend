@@ -141,7 +141,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 "linear-gradient(to right, #471396 0%, #621DB0 25%, #7C27CA 50%, #9631E5 75%, #B13BFF 100%)",
             }}
           >
-            <span className="text-lg">🏠</span>
+            {/* <span className="text-lg">🏠</span> */}
             <span>Enter SynSight</span>
           </button>
         </div>
