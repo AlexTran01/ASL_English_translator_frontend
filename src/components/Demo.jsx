@@ -11,7 +11,7 @@ export default function Demo(props){
        <img
         src={fgImage}
         alt="foreground"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-56"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-62"
         style={{ transform: ' scale(1.45)' }}
       />
 
