@@ -17,11 +17,12 @@ body.light-mode .project-name {
 :root {
   /* default = dark mode */
   /* default = DARK MODE */
-  --page-bg: #050510;                 /* almost black */
-  --navbar-bg: rgba(5, 5, 15, 0.95);  /* dark bar */
-  --main-bg: transparent;             /* let the gradient show through */
-  --panel-bg: rgba(15, 23, 42, 0.9);  /* dark card panels */
-  --text-main: #f9fafb;
+  --page-bg: #222222;                 /* dark gray background */
+  --navbar-bg: #222222; /* like bg-slate-900/70 on welcome */
+  --main-bg: transparent;             /* let page background show through */
+  --panel-bg: rgba(15, 23, 42, 0.7);  /* like the feature cards */
+  --text-main: #f9fafb;               /* text-slate-50 */
+
 
   /* Default accent gradient (purple) */
   --accent-gradient: linear-gradient(
@@ -160,7 +161,7 @@ body {
 /* Circular switch button, same size as menu but smaller arrow */
 .switch-btn {
   position: absolute;
-  top: 60%;
+  top: 62%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -429,6 +430,12 @@ body.light-mode .translation-option-btn {
   background: var(--accent-gradient);
   color: #f9fafb;
   font-size: 26px;
+}
+
+/* Make the House icon itself bigger inside the circle */
+.fab-btn.home-btn svg {
+  width: 40px;
+  height: 40px;
 }
 
 /* ON/OFF bubble: reuse accent gradient and center the switch */

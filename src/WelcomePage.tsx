@@ -103,7 +103,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 className={[
                   "rounded-xl border p-4 flex flex-col text-left",
                   cardBase,
-                  "transition-all duration-2500 ease-out transform",
+                  "transition-all duration-500 ease-out transform",
                   "hover:translate-y-[-2px]",
                   emphasisClasses,
                 ].join(" ")}
@@ -119,7 +119,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 {/* Expanding text box with "opening" animation */}
                 <div
                   className={[
-                    `mt-2 text-sm ${longColor} transition-all duration-2500 ease-out overflow-hidden`,
+                    `mt-2 text-sm ${longColor} transition-all duration-500 ease-out overflow-hidden`,
                     isActive ? "max-h-56 opacity-100" : "max-h-0 opacity-0",
                   ].join(" ")}
                 >
@@ -141,7 +141,6 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 "linear-gradient(to right, #471396 0%, #621DB0 25%, #7C27CA 50%, #9631E5 75%, #B13BFF 100%)",
             }}
           >
-            {/* <span className="text-lg">🏠</span> */}
             <span>Enter SynSight</span>
           </button>
         </div>

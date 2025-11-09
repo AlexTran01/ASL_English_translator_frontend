@@ -7,7 +7,8 @@ import RightComponent from './components/RightComponet.jsx';
 import Demo from './components/Demo.jsx'
 import Switcher4 from './components/Switcher4.jsx'
 import OptionDropdown from './components/OptionDropdown.jsx'
-import { Camera, CameraOff, Sun, Moon, MegaphoneOff, Megaphone } from "lucide-react";
+import { Camera, CameraOff, Sun, Moon, Disc2 ,  } from "lucide-react";
+
 
 
 // 👇 add this import for your logo
@@ -78,19 +79,22 @@ function App({ onGoHome }: AppProps) {
             <button
               onClick={toggleTranslate}
               className={`p-3 rounded-full transition-all ${translate
-                ? 'camera-on-gradient text-white'
-                : !lightMode
-                  ? 'bg-gray-700 text-gray-400'
-                  : 'bg-gray-300 text-gray-600'
+                  ? 'camera-on-gradient text-white' // same background as camera when ON
+                  : !lightMode
+                    ? 'bg-gray-700 text-gray-400'
+                    : 'bg-gray-300 text-gray-600'
                 }`}
               aria-label={translate ? "Stop translating" : "Start translating"}
             >
               {translate ? (
-                <Megaphone className="w-5 h-5" />
+                // ON: red disc, camera-style gradient background
+                <Disc2 className="w-5 h-5 text-red-700" />
               ) : (
-                <MegaphoneOff className="w-5 h-5" />
+                // OFF: grey disc, grey background
+                <Disc2 className="w-5 h-5" />
               )}
             </button>
+
           )}
 
           {/* Camera widget */}
