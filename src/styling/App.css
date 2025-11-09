@@ -1,23 +1,55 @@
 @import "tailwindcss";
 
+/* Light mode variant of the SynSight logo text */
+body.light-mode .project-name {
+  background: linear-gradient(
+    90deg,
+    #FC466B 0%,
+    #3F5EFB 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 /* === THEME VARIABLES === */
 :root {
   /* default = dark mode */
-  --page-bg: #000000;
-  --navbar-bg: #000000;
-  --main-bg: #000000;
-  --panel-bg: #000000;
+  --page-bg: #222222;
+  --navbar-bg: #222222;
+  --main-bg: #222222;
+  --panel-bg: #222222;
   --text-main: #ffffff;
+
+  /* Default accent gradient (purple) */
+  --accent-gradient: linear-gradient(
+    to right,
+    #471396 0%,
+    #621DB0 25%,
+    #7C27CA 50%,
+    #9631E5 75%,
+    #B13BFF 100%
+  );
 }
 
 /* Light mode overrides – applied when body has .light-mode */
 body.light-mode {
-  --page-bg: #f3f4f6;   /* page background */
-  --navbar-bg: #ffffff; /* navbar background */
-  --main-bg: #ffffff;   /* main container background */
-  --panel-bg: #f9fafb;  /* left/right panels */
-  --text-main: #111827; /* main text color */
+  --page-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --main-bg: #ffffff;
+  --panel-bg: #f9fafb;
+  --text-main: #111827;
+
+  /* Light mode accent: pink → blue */
+  --accent-gradient: linear-gradient(
+    90deg,
+    #FC466B 0%,
+    #3F5EFB 100%
+  );
 }
+
+
 
 html,
 body {
@@ -48,27 +80,13 @@ body {
 }
 
 .navbar::after {
-  --nav-gradient: linear-gradient(to right,
-  #471396 0%,
-  #5217A0 10%,
-  #5C1BAB 20%,
-  #671FB6 30%,
-  #7123C0 40%,
-  #7C27CA 50%,
-  #872BD5 60%,
-  #912FE0 70%,
-  #9C33EA 80%,
-  #A637F4 90%,
-  #B13BFF 100%
-);
-
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: 3px;                /* thickness of the “border” */
-  background: var(--nav-gradient);
+  background: var(--accent-gradient);
 }
 
 .project-name {
@@ -99,11 +117,11 @@ body {
 }
 
 .turn-on-camera-btn {
-  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
+  background: var(--accent-gradient);
   color: white;
   border: none;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
 }
 
@@ -124,7 +142,7 @@ body {
   background: var(--panel-bg);
   color: var(--text-main);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 30px;
 }
 
 .right_box {
@@ -134,13 +152,12 @@ body {
   background: var(--panel-bg);
   color: var(--text-main);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 30px;
 }
 
 /* Clearfix for floats */
 .container::after { content: ""; display: table; clear: both; }
 
-/* Circular switch button, same roundness/size as menu button */
 /* Circular switch button, same size as menu but smaller arrow */
 .switch-btn {
   position: absolute;
@@ -153,13 +170,7 @@ body {
   border-radius: 9999px;
   border: none;
 
-  background: linear-gradient(to right,
-    #471396 0%,
-    #621DB0 25%,
-    #7C27CA 50%,
-    #9631E5 75%,
-    #B13BFF 100%
-  );
+  background: var(--accent-gradient);
   color: white;
   cursor: pointer;
 
@@ -168,7 +179,7 @@ body {
   justify-content: center;
 
   /* arrow size */
-  font-size: 28px;       /* smaller arrow */
+  font-size: 28px;
   font-weight: 700;
   text-shadow:
     0 0 1px rgba(255, 255, 255, 0.8),
@@ -178,7 +189,7 @@ body {
 .show-demo-button {
   display: block;
   margin: 24px auto;
-  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
+  background: var(--accent-gradient);
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
@@ -205,13 +216,7 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 9999px;
-  background: linear-gradient(to right,
-    #471396 0%,
-    #621DB0 25%,
-    #7C27CA 50%,
-    #9631E5 75%,
-    #B13BFF 100%
-  );
+  background: var(--accent-gradient);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   cursor: pointer;
   z-index: 200;
@@ -281,7 +286,7 @@ body {
   height: 64px;
   border-radius: 9999px;
   border: none;
-  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
+  background: var(--accent-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,13 +310,7 @@ body {
   inset: 0;
   border-radius: 9999px;
   border: none;
-  background: linear-gradient(to right,
-    #471396 0%,
-    #621DB0 25%,
-    #7C27CA 50%,
-    #9631E5 75%,
-    #B13BFF 100%
-  );
+  background: var(--accent-gradient);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   cursor: pointer;
 }
@@ -392,29 +391,16 @@ body {
 }
 
 
-/* Home bubble: dark-blue gradient with house icon */
+/* Home bubble */
 .fab-btn.home-btn {
-  background: linear-gradient(
-    to right,
-    #471396 0%,
-    #621DB0 25%,
-    #7C27CA 50%,
-    #9631E5 75%,
-    #B13BFF 100%
-  );
+  background: var(--accent-gradient);
   color: #f9fafb;
   font-size: 26px;
 }
 
-/* ON/OFF bubble: reuse your purple gradient and center the switch */
+/* ON/OFF bubble: reuse accent gradient and center the switch */
 .fab-menu .on_off-btn {
-  background: linear-gradient(to right,
-    #471396 0%,
-    #621DB0 25%,
-    #7C27CA 50%,
-    #9631E5 75%,
-    #B13BFF 100%
-  );
+  background: var(--accent-gradient);
   color: white;
   display: flex;
   align-items: center;
@@ -445,7 +431,7 @@ body {
 
   /* SIZE of the overlay area on the image: */
   width: 20%;          /* width relative to the image */
-  height: 25%;         /* height relative to the image */
+  height: 30%;         /* height relative to the image */
   max-width: 420px;    /* cap size on big screens */
   max-height: 260px;   /* optional: cap height so it doesn’t get too tall */
 
@@ -460,7 +446,7 @@ body {
   width: 100%;
   height: 100%;              
   border: 2px solid #ffffff;
-  border-radius: 12px;
+  border-radius: 30px;
   padding: 16px;
 
   background-image: linear-gradient(
@@ -502,3 +488,19 @@ body {
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
+
+/* Default (dark mode) translation option button */
+.translation-option-btn {
+  background: var(--accent-gradient);  /* same as other gradient buttons */
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+

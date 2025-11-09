@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Switcher4 from "./components/Switcher4.jsx";
 
 type WelcomePageProps = {
   onEnterApp: () => void;
@@ -9,8 +8,6 @@ type FeatureId = "camera" | "ai" | "ui";
 
 const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
   const [activeFeature, setActiveFeature] = useState<FeatureId | null>("camera");
-  const [lightMode, setLightMode] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
 
   const features: {
     id: FeatureId;
@@ -48,52 +45,22 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
 
   const someActive = activeFeature !== null;
 
-  const handleToggleLightMode = () => {
-    setLightMode((prev) => !prev);
-  };
-
-  const toggleNav = () => {
-    setNavOpen((prev) => !prev);
-  };
-
-  const bgGradient = lightMode
-    ? "linear-gradient(to bottom, #f9fafb 0%, #e5e7eb 40%, #d1d5db 100%)"
-    : "linear-gradient(to bottom, #000000 0%, #050505 40%, #111111 100%)";
-
-  const textRootClass = lightMode ? "text-slate-900" : "text-slate-50";
-
   return (
     <div
-      className={`min-h-screen flex items-center justify-center px-6 ${textRootClass}`}
+      className="min-h-screen text-slate-50 flex items-center justify-center px-6"
       style={{
-        background: bgGradient,
+        background:
+          "linear-gradient(to bottom, #222222 0%, #222222 40%, #222222 100%)",
       }}
     >
       <div className="max-w-4xl w-full space-y-10">
         {/* Logo + title */}
         <div className="text-center space-y-4">
-          <div
-            className={[
-              "inline-flex items-center gap-3 px-4 py-2 rounded-full border",
-              lightMode
-                ? "bg-white/80 border-purple-300/60"
-                : "bg-slate-900/70 border-purple-500/40",
-            ].join(" ")}
-          >
-            <span
-              className={[
-                "text-xs font-semibold uppercase tracking-[0.2em]",
-                lightMode ? "text-purple-600" : "text-purple-300",
-              ].join(" ")}
-            >
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/70 border border-purple-500/40">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-purple-300">
               Welcome to
             </span>
-            <span
-              className={[
-                "text-sm font-semibold",
-                lightMode ? "text-slate-900" : "text-purple-100",
-              ].join(" ")}
-            >
+            <span className="text-sm font-semibold text-purple-100">
               SynSight
             </span>
           </div>
@@ -114,16 +81,15 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
             const emphasisClasses = someActive
               ? isActive
                 ? "scale-110 opacity-100 ring-2 ring-purple-400/80 shadow-lg shadow-purple-900/50"
-                : "scale-85 opacity-60"
+                : "scale-80 opacity-55"
               : "scale-100 opacity-100";
 
-            const cardBase = lightMode
-              ? "bg-white/80 border-slate-200 hover:bg-white"
-              : "bg-slate-900/70 border-slate-700/60 hover:bg-slate-900/90";
+            const cardBase =
+              "bg-slate-900/70 border-slate-700/60 hover:bg-slate-900/90";
 
-            const titleColor = lightMode ? "text-slate-900" : "text-slate-100";
-            const shortColor = lightMode ? "text-slate-600" : "text-slate-300";
-            const longColor = lightMode ? "text-slate-700" : "text-slate-200";
+            const titleColor = "text-slate-100";
+            const shortColor = "text-slate-300";
+            const longColor = "text-slate-200";
 
             return (
               <button
@@ -137,7 +103,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 className={[
                   "rounded-xl border p-4 flex flex-col text-left",
                   cardBase,
-                  "transition-all duration-300 ease-out transform",
+                  "transition-all duration-2500 ease-out transform",
                   "hover:translate-y-[-2px]",
                   emphasisClasses,
                 ].join(" ")}
@@ -153,8 +119,8 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
                 {/* Expanding text box with "opening" animation */}
                 <div
                   className={[
-                    `mt-2 text-sm ${longColor} transition-all duration-300 ease-out overflow-hidden`,
-                    isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0",
+                    `mt-2 text-sm ${longColor} transition-all duration-2500 ease-out overflow-hidden`,
+                    isActive ? "max-h-56 opacity-100" : "max-h-0 opacity-0",
                   ].join(" ")}
                 >
                   <p>{feature.long}</p>
@@ -179,36 +145,6 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
             <span>Enter SynSight</span>
           </button>
         </div>
-      </div>
-
-      {/* Floating burger menu – only Light Mode option */}
-      <div className={`fab-wrapper ${navOpen ? "open" : ""}`}>
-        {/* Pop-out menu: just light mode toggle */}
-        <div className="fab-menu">
-          <button
-            className="fab-btn on_off-btn"
-            type="button"
-            aria-label="Toggle light mode"
-          >
-            <Switcher4
-              isChecked={lightMode}
-              onChange={handleToggleLightMode}
-            />
-          </button>
-        </div>
-
-        {/* Burger button itself */}
-        <button
-          id="nav-icon3"
-          className={navOpen ? "open" : ""}
-          onClick={toggleNav}
-          type="button"
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   );
