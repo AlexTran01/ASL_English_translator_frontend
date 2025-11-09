@@ -8,7 +8,11 @@ import Demo from './components/Demo.jsx'
 import Switcher4 from './components/Switcher4.jsx'
 import OptionDropdown from './components/OptionDropdown.jsx'
 
-function App() {
+type AppProps = {
+  onGoHome?: () => void;
+};
+
+function App({ onGoHome }: AppProps) {
 
   const [camera_state, set_camera_state] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
@@ -67,13 +71,17 @@ function App() {
               className="fab-btn home-btn"
               type="button"
               aria-label="Go home"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => {
+                if (onGoHome) onGoHome();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
             >
               🏠
             </button>
 
             <button className="fab-btn on_off-btn" type="button">
               <Switcher4 isChecked={showDemo} onChange={handleToggleDemo} />
+              
             </button>
           </div>
 

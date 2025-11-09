@@ -81,7 +81,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onEnterApp }) => {
 
           <p className="text-[11px] md:text-xs text-slate-400 text-center max-w-md">
             Click <span className="font-semibold text-slate-200">Enter SynSight</span> to go to the main app
-            (your <code>App.tsx</code> translator interface).
+            (<code>App.tsx</code> translator interface).
           </p>
         </div>
       </div>
