@@ -75,14 +75,15 @@
 }
 .main-container {
   padding: 30px;
-  max-width: 1100px;     /* adjust as you like */
+  max-width: 1200px;     /* adjust as you like */
   margin: 40px auto;     /* centers horizontally + adds space top/bottom */
-  background: rgba(255,255,255,0.02); /* optional */
+  background: #252526; /* optional */
   border-radius: 12px;   /* optional */
 }
 
 .left_box {
   float: left;
+  height: 450px;
   width: calc((100% - 70px) / 2); /* equal width minus gap */
   margin-right: 70px;
   background: #252526;
@@ -93,11 +94,34 @@
 
 .right_box {
   float: left;
+  height: 450px;
   width: calc((100% - 70px) / 2);
   background:#252526;
   color: white;
   padding: 20px;
   border-radius: 10px;
+}
+
+/* Clearfix for floats */
+.container::after { content: ""; display: table; clear: both; }
+
+/* Circular switch button, centered in the 70px gap */
+.switch-btn {
+  position: absolute ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(to right, #471396 0%,  #621DB0 25%,#7C27CA 50%,#9631E5 75%, #B13BFF 100%);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .show-demo-button {
@@ -110,5 +134,104 @@
   border: none;
   cursor: pointer;
 }
+/* === Burger + ON/OFF bubble === */
 
+.burger-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  z-index: 200;
+}
 
+/* Circular burger button */
+#nav-icon3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;          /* circle */
+  background: #111827;            /* dark background */
+  border: 2px solid #f9fafb;      /* light border */
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Hamburger lines */
+#nav-icon3 span {
+  position: absolute;
+  left: 50%;
+  width: 24px;
+  height: 3px;
+  background: #f9fafb;
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  transition:
+    top 0.25s ease,
+    transform 0.25s ease,
+    width 0.25s ease,
+    left 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* 4 lines stacked */
+#nav-icon3 span:nth-child(1) { top: 18px; }
+#nav-icon3 span:nth-child(2) { top: 26px; }
+#nav-icon3 span:nth-child(3) { top: 34px; }
+#nav-icon3 span:nth-child(4) { top: 42px; }
+
+/* Turn into an "X" when open */
+#nav-icon3.open span:nth-child(1) {
+  top: 26px;
+  width: 0%;
+  left: 50%;
+}
+
+#nav-icon3.open span:nth-child(2) {
+  top: 26px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+#nav-icon3.open span:nth-child(3) {
+  top: 26px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+#nav-icon3.open span:nth-child(4) {
+  top: 26px;
+  width: 0%;
+  left: 50%;
+}
+
+/* Container that holds the ON/OFF button */
+.onoff-container {
+  position: absolute;
+  left: 50%;
+  bottom: 0;                      /* start inside the circle */
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    bottom 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* When burger-wrapper has .open, slide the ON/OFF bubble up */
+.burger-wrapper.open .onoff-container {
+  bottom: calc(100% + 12px);     /* above the burger */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Style the ON/OFF button as its own circle */
+.onoff-container .on_off-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  border: none;
+  background: #10b981;           /* green-ish; tweak as you like */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
