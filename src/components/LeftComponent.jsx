@@ -45,13 +45,13 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
                 const data = await response.json();
                 console.log("API response:", data);
 
-                if (selected=="Word Level-Trained AI model")
+                if (selected === "Word Level-Trained AI model")
                     setOutput(prev => prev + " " + data.label)
 
-                else if (selected=="World Level-Google Gemini")
+                else if (selected === "World Level-Google Gemini")
                     setOutput(prev => prev + " " + data.prediction.label)
 
-                else if (selected == "Letter Level")
+                else if (selected === "Letter Level")
                     setOutput(prev => prev + " " + data.predictions[0])
             } catch (err) {
                 console.error("API call failed:", err);
@@ -74,15 +74,15 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
         if (!translate || !camera_state) return;
 
         switch (selected) {
-            case "Letter Level":
-
+            case "Letter Level":    
+                  Record3sThenSend("http://127.0.0.1:8000/v1/character_internal_model_asl/chunk")
                 break;
             case "Word Level-Trained AI model":
-                Record3sThenSend("http://127.0.0.1:8000/v1/translate_asl/chunk")
+                Record3sThenSend("http://127.0.0.1:8000/v1/word_internal_model_asl/chunk")
                 break;
 
             case "World Level-Google Gemini":
-                Record3sThenSend("http://127.0.0.1:8000/v1/gemini_asl/chunk")
+                Record3sThenSend("http://127.0.0.1:8000/v1/word_gemini_asl/chunk")
                 break;
 
             default:
