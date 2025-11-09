@@ -16,6 +16,7 @@ function App() {
   const [showDemo, setShowDemo] = useState(false)
   const [selected, setSelected] = useState("Translation Option")
   const [translate, setTranslate] = useState(false)
+  const [output, setOutput] = useState("")
 
   const toggleNav = () => {
     setNavOpen(prev => !prev);
@@ -64,13 +65,13 @@ function App() {
 
         <div className="flex">
           <div className="left_box w-1/2 h-100 rounded-lg border border-3">
-            <LeftComponent camera_state={camera_state} selected={selected} translate={translate} setTranslate={setTranslate} />
+            <LeftComponent camera_state={camera_state} selected={selected} translate={translate} setTranslate={setTranslate} setOutput={setOutput} />
           </div>
           <button className="switch-btn" aria-label="Switch view">
             ⇄
           </button>
           <div className="right_box w-1/2 h-100 rounded-lg border border-3">
-            <RightComponent />
+            <RightComponent output={output} />
           </div>
         </div>
         <OptionDropdown selected={selected} setSelected={setSelected} />
