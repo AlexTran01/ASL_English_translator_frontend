@@ -38,7 +38,7 @@ function App({ onGoHome }: AppProps) {
 
   function toggleCamera() {
     set_camera_state(prev => !prev)
-    
+
   }
 
   function toggleTranslate() {
@@ -53,6 +53,10 @@ function App({ onGoHome }: AppProps) {
     setLightMode(prev => !prev)
   }
 
+  function clearOutput() {
+    setOutput("")
+  }
+
   return (
     <>
       <div className="navbar border-b-2 w-full h-20 flex flex-row items-center justify-between px-4">
@@ -60,13 +64,18 @@ function App({ onGoHome }: AppProps) {
           SynSight
         </div>
 
-       
+
         <div className="flex gap-3">
 
-           {camera_state && (<button className='start-translate-btn' onClick={toggleTranslate}>
-          {translate ? "stop translating" : "start translating"}
-        </button>
-        )}
+          {output && (<button className='clear-output-btn' onClick={clearOutput}>
+            clear
+          </button>
+          )}
+
+          {camera_state && (<button className='start-translate-btn' onClick={toggleTranslate}>
+            {translate ? "stop translating" : "start translating"}
+          </button>
+          )}
 
           <button className='turn-on-camera-btn' onClick={toggleCamera}>
             Turn {camera_state ? "Off" : "On"} Camera
@@ -93,11 +102,13 @@ function App({ onGoHome }: AppProps) {
           <div className="right_box w-1/2 h-100 rounded-lg border border-3">
             <RightComponent output={output} />
           </div>
+
         </div>
 
         <OptionDropdown selected={selected} setSelected={setSelected} />
 
-        {showDemo && <Demo output={output}/>}
+
+        {showDemo && <Demo output={output} />}
 
         {/* Floating burger with Home + demo switch inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>

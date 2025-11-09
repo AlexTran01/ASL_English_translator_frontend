@@ -44,15 +44,23 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
                 });
                 const data = await response.json();
                 console.log("API response:", data);
-                setOutput(prev => prev + " " + data.prediction.label)
+
+                if (selected=="Word Level-Trained AI model")
+                    setOutput(prev => prev + " " + data.label)
+
+                else if (selected=="World Level-Google Gemini")
+                    setOutput(prev => prev + " " + data.prediction.label)
+
+                else if (selected == "Letter Level")
+                    setOutput(prev => prev + " " + data.predictions[0])
             } catch (err) {
                 console.error("API call failed:", err);
             }
 
             // Wait 1 second, then start next recording
-            setTimeout(() => {
+            // setTimeout(() => {
                 if (!stopRef.current) Record3sThenSend(path);
-            }, 1000);
+            // }, 1000);
         };
 
         mediaRecorder.start();
@@ -70,7 +78,7 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
 
                 break;
             case "Word Level-Trained AI model":
-                // Record3sThenSend(path="")
+                Record3sThenSend("http://127.0.0.1:8000/v1/translate_asl/chunk")
                 break;
 
             case "World Level-Google Gemini":
