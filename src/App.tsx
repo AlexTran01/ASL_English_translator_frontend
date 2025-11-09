@@ -69,16 +69,12 @@ function App({ onGoHome }: AppProps) {
         )}
 
           <button className='turn-on-camera-btn' onClick={toggleCamera}>
-            turn {camera_state ? "off" : "on"} camera
+            Turn {camera_state ? "Off" : "On"} Camera
           </button>
 
-          {/* top-right light mode button */}
-          <button
-            className="turn-on-camera-btn"
-            type="button"
-            onClick={handleToggleLightMode}
-          >
-            {lightMode ? "Dark mode" : "Light mode"}
+          {/* New light mode toggle button */}
+          <button className='turn-on-camera-btn' onClick={handleToggleLightMode}>
+            {lightMode ? "Dark Mode" : "Light Mode"}
           </button>
         </div>
       </div>
@@ -103,9 +99,9 @@ function App({ onGoHome }: AppProps) {
 
         {showDemo && <Demo output={output}/>}
 
-        {/* Floating burger with Home + switches inside */}
+        {/* Floating burger with Home + demo switch inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>
-          {/* Pop-out menu: Home, Demo toggle, Light mode toggle */}
+          {/* Pop-out menu: Home + Demo toggle (light mode removed) */}
           <div className="fab-menu">
             {/* Home button */}
             <button
@@ -123,11 +119,6 @@ function App({ onGoHome }: AppProps) {
             {/* Demo ON/OFF */}
             <button className="fab-btn on_off-btn" type="button">
               <Switcher4 isChecked={showDemo} onChange={handleToggleDemo} />
-            </button>
-
-            {/* Light mode ON/OFF */}
-            <button className="fab-btn on_off-btn" type="button" aria-label="Toggle light mode">
-              <Switcher4 isChecked={lightMode} onChange={handleToggleLightMode} />
             </button>
           </div>
 
