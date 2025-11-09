@@ -1,13 +1,12 @@
 import React from "react";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 
-export default function LeftComponent({ camera_state, selected }) {
+export default function LeftComponent({ camera_state, selected, translate, setTranslate }) {
 
     const webcamRef = useRef(null);
 
     function Record3sThenSend(path) {
-        // if (!camera_state) return;
         const stream = webcamRef.current.stream;
         if (!stream) return;
 
@@ -50,18 +49,23 @@ export default function LeftComponent({ camera_state, selected }) {
     }
 
     useEffect(() => {
-        if (!camera_state) return;
+        if (!translate) return; // used to be btn to check whether camera is on
 
         switch (selected) {
             case "Letter Level":
+                
                 break;
             case "Word Level-Trained AI model":
                 Record3sThenSend(path="")
             case "World Level-Google Gemini":
-                Record3sThenSend(path="");
+                Record3sThenSend(path="")
                 break;
+            default:
+                window.alert("please pick an translating option")
+                setTranslate(false)
+                return;
         }
-    }, [camera_state, selected]);
+    }, [translate] );
 
     return (
         <div className="left-container">

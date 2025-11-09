@@ -14,7 +14,8 @@ function App() {
   const [camera_state, set_camera_state] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
-  const [selected, setSelected] = useState("Translation Option")   // <-- NEW]
+  const [selected, setSelected] = useState("Translation Option")
+  const [translate, setTranslate] = useState(false)
 
   const toggleNav = () => {
     setNavOpen(prev => !prev);
@@ -22,16 +23,22 @@ function App() {
 
   function toggleCamera() {
     set_camera_state(prev => !prev)
+    
   }
 
-  function toggleNavIcon() {                      // <-- NEW
+  function toggleNavIcon() {
     setNavOpen(prev => !prev)
+  }
+
+  function toggleTranslate() {
+    setTranslate(prev => !prev)
   }
 
 
   function handleToggleDemo() {
-    setShowDemo(prev => !prev)  // toggle Demo component
+    setShowDemo(prev => !prev)
   }
+
 
 
 
@@ -42,16 +49,22 @@ function App() {
           SynSight
         </div>
 
+        {camera_state && (<button className='start-translate-btn' onClick={toggleTranslate}>
+          {translate ? "stop translating" : "start translating"}
+        </button>
+        )}
+
         <button className='turn-on-camera-btn' onClick={toggleCamera}>
           turn {camera_state ? "off" : "on"} camera
         </button>
+
       </div>
 
       <div className="main-container">
 
         <div className="flex">
           <div className="left_box w-1/2 h-100 rounded-lg border border-3">
-            <LeftComponent camera_state={camera_state} selected={selected} />
+            <LeftComponent camera_state={camera_state} selected={selected} translate={translate} setTranslate={setTranslate} />
           </div>
           <button className="switch-btn" aria-label="Switch view">
             ⇄
