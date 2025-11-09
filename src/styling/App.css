@@ -128,7 +128,7 @@ body {
 .main-container {
   padding: 30px;
   max-width: 1200px;     /* adjust as you like */
-  margin: 40px auto;     /* centers horizontally + adds space top/bottom */
+  margin: 20px auto;     /* centers horizontally + adds space top/bottom */
   background: var(--main-bg); /* theme background */
   color: var(--text-main);
   border-radius: 12px;   /* optional */

@@ -78,6 +78,12 @@ function App({ onGoHome }: AppProps) {
           </div>
         </div>
 
+        {/* Center (perfectly centered) */}
+  <div className="absolute left-1/2 -translate-x-1/2">
+    <OptionDropdown selected={selected} setSelected={setSelected} />
+  </div>
+
+
         <div className="flex items-center gap-3">
 
           {output && (<button className='clear-output-btn' onClick={clearOutput}>
@@ -106,6 +112,8 @@ function App({ onGoHome }: AppProps) {
             </button>
 
           )}
+
+          
 
           {/* Camera widget */}
           <button
@@ -142,16 +150,16 @@ function App({ onGoHome }: AppProps) {
 
       </div>
 
-      <div className="mt-4 flex justify-center relative h-16">
+      {/* <div className="mt-4 flex justify-center relative h-16">
         <div className="absolute top-6">
           <OptionDropdown selected={selected} setSelected={setSelected} />
         </div>
-      </div>
+      </div> */}
 
 
-      <div className="main-container">
+      <div className="main-container mt-20">
 
-        <div className="flex">
+        <div className="flex gap-6">
           <div className="left_box w-1/2 h-100 rounded-lg border border-3">
             <LeftComponent camera_state={camera_state} selected={selected} translate={translate} setTranslate={setTranslate} setOutput={setOutput} />
           </div>
