@@ -82,7 +82,7 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
                 break;
 
             case "World Level-Google Gemini":
-                Record3sThenSend("http://127.0.0.1:8000/gemini_asl/chunk")
+                Record3sThenSend("http://127.0.0.1:8000/v1/gemini_asl/chunk")
                 break;
 
             default:
