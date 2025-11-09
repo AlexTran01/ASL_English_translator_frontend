@@ -1,36 +1,34 @@
 import React, { useState } from 'react'
 
-const Switcher4 = () => {
-  const [isChecked, setIsChecked] = useState(false)
+const Switcher4 = ({ isChecked, onChange }) => {
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked)
-  }
+    return (
+         <div className="flex justify-end mt-2">
+      <label className="relative w-14 h-8 cursor-pointer select-none">
+        {/* Hidden checkbox */}
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={onChange}
+          className="sr-only"
+        />
 
-  return (
-    <>
-      <label className='flex cursor-pointer select-none items-center mt-2'>
-        <div className='relative'>
-          <input
-            type='checkbox'
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-            className='sr-only'
-          />
-          <div
-            className={`border box block h-8 w-14 rounded-full ${
-              isChecked ? 'bg-primary' : 'bg-dark'
-            }`}
-          ></div>
-          <div
-            className={`absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white transition ${
-              isChecked ? 'translate-x-full' : ''
-            }`}
-          ></div>
-        </div>
+        {/* Toggle track */}
+        <div
+          className={`w-full h-full rounded-full transition-colors duration-300 border ${
+            isChecked ? "bg-primary" : "bg-dark"
+          }`}
+        ></div>
+
+        {/* Toggle knob */}
+        <div
+          className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${
+            isChecked ? "translate-x-6" : ""
+          }`}
+        ></div>
       </label>
-    </>
-  )
+    </div>
+    )
 }
 
 export default Switcher4
