@@ -101,7 +101,7 @@ function App({ onGoHome }: AppProps) {
 
         <OptionDropdown selected={selected} setSelected={setSelected} />
 
-        {showDemo && <Demo />}
+        {showDemo && <Demo output={output}/>}
 
         {/* Floating burger with Home + switches inside */}
         <div className={`fab-wrapper ${navOpen ? 'open' : ''}`}>

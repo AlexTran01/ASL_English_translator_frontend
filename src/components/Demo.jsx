@@ -48,19 +48,14 @@ export default function Demo(props) {
       <img
         src={fgImage}
         alt="foreground"
-<<<<<<< HEAD
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-62"
-        style={{ transform: ' scale(1.45)' }}
-=======
         className="absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-56"
         style={{ transform: "scale(1.45)" }}
->>>>>>> 646955be29ce765788d39c1c2a63fcf02c16cfb7
       />
 
       {/* Overlay with auto-scrolling text */}
       <div className="demo-overlay">
         <div className="demo-overlay-box" ref={overlayRef}>
-          <RightComponent />
+          <RightComponent output={props.output} />
         </div>
       </div>
     </div>

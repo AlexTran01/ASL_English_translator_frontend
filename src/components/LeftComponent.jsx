@@ -2,7 +2,7 @@ import React from "react";
 import { useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 
-export default function LeftComponent({ camera_state, selected, translate, setTranslate, }) {
+export default function LeftComponent({ camera_state, selected, translate, setTranslate, setOutput}) {
 
     const webcamRef = useRef(null);
     const stopRef = useRef(false); 
@@ -43,8 +43,8 @@ export default function LeftComponent({ camera_state, selected, translate, setTr
                     body: formData,
                 });
                 const data = await response.json();
-                
                 console.log("API response:", data);
+                setOutput(prev => prev + " " + data.prediction.label)
             } catch (err) {
                 console.error("API call failed:", err);
             }
