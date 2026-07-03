@@ -1,1 +1,1 @@
-# ASL_English_translator_fronted
+# ASL_English_translator_frontend
